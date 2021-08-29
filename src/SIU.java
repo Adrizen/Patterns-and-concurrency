@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import Usuario;
+import Tramite;
 
 private boolean status; //Esta variable nos idica el estado del SIU
 private HashMap baseDeDatos;//Donde se tiene los usuario;password
