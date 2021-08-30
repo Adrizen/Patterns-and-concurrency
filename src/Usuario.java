@@ -3,6 +3,7 @@ public class Usuario implements Runnable {
     private String dni;
     private String nombre;
     private String apellido;
+    private Token untoken;
     //private SIU siu;
 
     public Usuario(String d){
