@@ -6,6 +6,7 @@ public class SIU {
 
     public SIU() {
         this.status = true;
+        this.tramites = new HashMap();
         this.baseDeDatos = new HashMap();
     }
 
