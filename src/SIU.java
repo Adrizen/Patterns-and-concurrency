@@ -7,7 +7,6 @@ private HashMap tramites;//almaceno los tramites posibles
 
 public SIU() {
     this.status=true;
-    this.baseDeDatos= new HashMap();
     this.tramites= new HashMap();
 }
 
