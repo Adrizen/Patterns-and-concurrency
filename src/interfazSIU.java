@@ -20,6 +20,14 @@ public class InterfazSIU {
         }
         return success;
     }
+    return unt;
+}
+
+//Falta el metodo que seleccione el tramite a realizar
+
+
+
+
 
     public boolean userLoad(Usuario user) {
         // Cargo un usuario a mi BDD

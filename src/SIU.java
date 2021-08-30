@@ -7,6 +7,7 @@ public class SIU {
     public SIU() {
         this.status = true;
         this.tramites = new HashMap();
+        this.baseDeDatos = new HashMap();
     }
 
     public void serverDown() {
@@ -22,6 +23,11 @@ public class SIU {
     public boolean status() {
         // Este metodo informa el estado del servidor
         return this.status;
+    }
+
+    public boolean serviceLoad(Tramite unt) {
+        // Cargo un Tramite a mi BDD
+        return tramites.put(unt.getKey(), unT);
     }
 
     public Tramite requestService(int key_service) {
