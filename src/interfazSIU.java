@@ -1,44 +1,24 @@
 import java.util.HashMap;
-import Usuario;
+import java.util.ArrayList;
 
-public class interfazSIU() {
-private HashMap baseDeDatos;//Donde se tiene los usuario;password
-private SIU service;
-private List cache;//simulamos el cache
-public interfazSIU() {
-    this.baseDeDatos= new HashMap();
-}
+public class InterfazSIU {
+    private HashMap baseDeDatos;// Donde se tiene los usuario;password
+    private SIU service;
+    private ArrayList cache;// simulamos el cache
 
-public boolean logIn(Token atoken){
-    boolean success=false;
-    Object user=(Usuario)baseDeDatos.get(atoken.getUsers());
-    if(user!=null){//Verifico si el user existe
-        if(user.equals(atoken))//Comparo si coinciden los token
-            success=true;
+    public InterfazSIU() {
+        this.baseDeDatos = new HashMap();
+        cache = new ArrayList();
     }
-    return success;
-}
 
-public boolean userLoad(Usuario user){
-    //Cargo un usuario a mi BDD
-   return baseDeDatos.put(user.getToken().getUser(),user);
-}
-
-private Tramite recoverCache(Tramite unT){
-   Tramite unt;
-   // if(cache.contains(unT))
-    unt=cache.get(cache.indexOf(unT));
-    return unt;
-}
-
-public Tramite serviceRequired (Tramite t){
-    Tramite unt;
-    if(service.getStatus()){
-        if(cache.contains(t)){
-            unt=recoverCache(t);
-        }else{
-            unt=service.requestService(t.getKey());
+    public boolean logIn(Token atoken) {
+        boolean success = false;
+        Object user = (Usuario) baseDeDatos.get(atoken.getUsers());
+        if (user != null) { // Verifico si el user existe
+            if (user.equals(atoken)) // Comparo si coinciden los token
+                success = true;
         }
+        return success;
     }
     return unt;
 }
@@ -49,7 +29,28 @@ public Tramite serviceRequired (Tramite t){
 
 
 
+    public boolean userLoad(Usuario user) {
+        // Cargo un usuario a mi BDD
+        return baseDeDatos.put(user.getToken().getUser(), user);
+    }
 
+    private Tramite recoverCache(Tramite unT) {
+        Tramite unt;
+        // if(cache.contains(unT))
+        unt = cache.get(cache.indexOf(unT));
+        return unt;
+    }
 
+    public Tramite serviceRequired(Tramite t) {
+        Tramite unt;
+        if (service.getStatus()) {
+            if (cache.contains(t)) {
+                unt = recoverCache(t);
+            } else {
+                unt = service.requestService(t.getKey());
+            }
+        }
+        return unt;
+    }
 
 }
