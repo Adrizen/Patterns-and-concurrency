@@ -7,7 +7,6 @@ public class SIU {
     public SIU() {
         this.status = true;
         this.baseDeDatos = new HashMap();
-        this.tramites = new HashMap();
     }
 
     public void serverDown() {
@@ -27,7 +26,7 @@ public class SIU {
 
     public boolean serviceLoad(Tramite unt) {
         // Cargo un Tramite a mi BDD
-        return baseDeDatos.put(unt.getKey(), unT);
+        return tramites.put(unt.getKey(), unT);
     }
 
     public Tramite requestService(int key_service) {
