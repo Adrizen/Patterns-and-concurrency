@@ -10,6 +10,11 @@ public class Usuario implements Runnable {
 
     public void run() {
         System.out.println("Soy " + this.dni + " y me quiero loguear.");
+        Token miToken = new Token(u, p);    // Genero mi token.
+        if (interfazSIU.logIn(miToken)){
+            // El usuario se pudo loguear.
+            
+        }
     }
 
 }
