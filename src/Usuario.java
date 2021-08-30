@@ -1,6 +1,6 @@
 public class Usuario implements Runnable {
 
-    private String dni;
+    private int dni;
     private String nombre;
     private String apellido;
     private Token untoken;
@@ -11,12 +11,18 @@ public class Usuario implements Runnable {
         this.interfazSIU = i;
     }
   
-    public Usuario(String d, String a, String n, Token unt, InterfazSIU i) {
+    public Usuario(int d, String a, String n, Token unt, InterfazSIU i) {
         this.dni = d;
         this.apellido=a;
         this.nombre=n;
         this.untoken=unt;
         this.interfazSIU = i;
+    }
+    public int gerUser(){
+        return this.dni;
+    }
+    public Token getToken(){
+        return this.untoken;
     }
 
     public void run() {

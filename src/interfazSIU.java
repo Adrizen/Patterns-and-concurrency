@@ -11,11 +11,11 @@ public class InterfazSIU {
         cache = new ArrayList();
     }
 
-    public boolean logIn(Token atoken) {
+    public boolean logIn(Token unt) {
         boolean success = false;
-        Object user = (Usuario) baseDeDatos.get(atoken.getUsers());
+        Object user = (Usuario) baseDeDatos.get(unt.getUser());
         if (user != null) { // Verifico si el user existe
-            if (user.equals(atoken)) // Comparo si coinciden los token
+            if (user.getToken().equals(unt)) // Comparo si coinciden los token
                 success = true;
         }
         return success;
@@ -31,7 +31,7 @@ public class InterfazSIU {
 
     public boolean userLoad(Usuario user) {
         // Cargo un usuario a mi BDD
-        return baseDeDatos.put(user.getToken().getUser(), user);
+        return baseDeDatos.put(user.getUser(), user);
     }
 
     private Tramite recoverCache(Tramite unT) {
