@@ -12,8 +12,4 @@ public class Usuario implements Runnable {
         System.out.println("Soy " + this.dni + " y me quiero loguear.");
     }
 
-    public void setLogueado(boolean e) {
-        this.logueado = e;
-    }
-
 }

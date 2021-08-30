@@ -1,20 +1,21 @@
 import java.util.HashMap;
+import java.util.ArrayList;
 
-public class InterfazSIU()
-{
+public class InterfazSIU {
     private HashMap baseDeDatos;// Donde se tiene los usuario;password
     private SIU service;
-    private List cache;// simulamos el cache
+    private ArrayList cache;// simulamos el cache
 
-public InterfazSIU() {
-    this.baseDeDatos= new HashMap();
-}
+    public InterfazSIU() {
+        this.baseDeDatos = new HashMap();
+        cache = new ArrayList();
+    }
 
     public boolean logIn(Token atoken) {
         boolean success = false;
         Object user = (Usuario) baseDeDatos.get(atoken.getUsers());
-        if (user != null) {// Verifico si el user existe
-            if (user.equals(atoken))// Comparo si coinciden los token
+        if (user != null) { // Verifico si el user existe
+            if (user.equals(atoken)) // Comparo si coinciden los token
                 success = true;
         }
         return success;

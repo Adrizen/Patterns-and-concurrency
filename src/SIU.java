@@ -1,16 +1,14 @@
 import java.util.HashMap;
-import Usuario;
-import Tramite;
 
-public class SIU(){
+public class SIU {
     private boolean status; // Esta variable nos idica el estado del SIU
     private HashMap tramites;// almaceno los tramites posibles
 
-public SIU() {
-    this.status=true;
-    this.baseDeDatos= new HashMap();
-    this.tramites= new HashMap();
-}
+    public SIU() {
+        this.status = true;
+        this.baseDeDatos = new HashMap();
+        this.tramites = new HashMap();
+    }
 
     public void serverDown() {
         // Este metodo provoca la caida del servidor
