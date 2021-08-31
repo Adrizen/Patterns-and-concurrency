@@ -1,22 +1,28 @@
+
 public class Usuario implements Runnable {
 
-    private String dni;
-    private String nombre;
-    private String apellido;
-    private Token untoken;
-    //private SIU siu;
+    private String user;
+    private InterfazSIU siu;
+    private String password;
 
-    public Usuario(String d, InterfazSIU i) {
-        this.dni = d;
-        this.interfazSIU = i;
+    // Colores.
+    public static final String GREEN_BOLD = "\033[1;32m";   // GREEN
+    public static final String RESET = "\033[0m";           // Text Reset
+
+    public Usuario(String n, String p, InterfazSIU i) {
+        this.user = n;
+        this.password = p;
+        this.siu = i;
+    }
+
+    public String getUser() {
+        return this.user;
     }
 
     public void run() {
-        System.out.println("Soy " + this.dni + " y me quiero loguear.");
-        Token miToken = new Token(u, p);    // Genero mi token.
-        if (interfazSIU.logIn(miToken)){
-            // El usuario se pudo loguear.
-            
+        System.out.println("Soy " + this.user + " y me quiero loguear.");
+        if (siu.logIn(this.user,this.password)) {
+            System.out.println(GREEN_BOLD + "Soy " + this.user + " y me pude loguear." + RESET);
         }
     }
 

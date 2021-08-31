@@ -2,55 +2,48 @@ import java.util.HashMap;
 import java.util.ArrayList;
 
 public class InterfazSIU {
-    private HashMap baseDeDatos;    // Donde se tiene los usuario;password
+    private HashMap<String, Token> tokenUsuarios; // Donde se tiene los usuario;password
     private SIU service;
-    private ArrayList cache;        // Simulamos el cache
+    private ArrayList cache; // Simulamos el cache
 
     public InterfazSIU() {
-        this.baseDeDatos = new HashMap();
+        this.tokenUsuarios = new HashMap<String, Token>();
         cache = new ArrayList();
     }
 
-    public boolean logIn(Token atoken) {
+    public boolean logIn(String user, String password) {
         boolean success = false;
-        Object user = (Usuario) baseDeDatos.get(atoken.getUsers());
-        if (user != null) {             // Verifico si el user existe
-            if (user.equals(atoken))    // Comparo si coinciden los token
-                success = true;
-        }
+        Token token = new Token(user, password);
+        if (token.equals(tokenUsuarios.get(user)))
+            success = true;
         return success;
     }
-    return unt;
-}
 
-//Falta el metodo que seleccione el tramite a realizar
-
-
-
-
-
-    public boolean userLoad(Usuario user) {
-        // Cargo un usuario a mi BDD
-        return baseDeDatos.put(user.getToken().getUser(), user);
-    }
-
-    private Tramite recoverCache(Tramite unT) {
-        Tramite unt;
-        // if(cache.contains(unT))
-        unt = cache.get(cache.indexOf(unT));
-        return unt;
-    }
-
-    public Tramite serviceRequired(Tramite t) {
-        Tramite unt;
-        if (service.getStatus()) {
-            if (cache.contains(t)) {
-                unt = recoverCache(t);
-            } else {
-                unt = service.requestService(t.getKey());
-            }
+    public boolean userLoad(String user, String contraseña) {
+        boolean exito = false;
+        Token token = new Token(user, contraseña);
+        if (tokenUsuarios.put(user, token) != null) {
+            exito = true;
         }
-        return unt;
+        return exito;
     }
 
+    //private Tramite recoverCache(Tramite unT) {
+    //Tramite unt;
+    // if(cache.contains(unT))
+    //unt = cache.get(cache.indexOf(unT));
+    //return unt;
+    //}
+
+    //public Tramite serviceRequired(Tramite t) {
+    //Tramite unt;
+    //if (service.getStatus()) {
+    //if (cache.contains(t)) {
+    //  unt = recoverCache(t);
+    //} else {
+    //  unt = service.requestService(t.getKey());
+    //}
+    //}
+    //return unt;
+    //}
 }

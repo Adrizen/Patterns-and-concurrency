@@ -1,13 +1,12 @@
 import java.util.HashMap;
 
 public class SIU {
-    private boolean status; // Esta variable nos idica el estado del SIU
-    private HashMap tramites;// almaceno los tramites posibles
+    private boolean status;     // Indica el estado del SIU
+    private HashMap tramites;   // Almacena los tramites posibles
 
     public SIU() {
         this.status = true;
         this.tramites = new HashMap();
-        this.baseDeDatos = new HashMap();
     }
 
     public void serverDown() {
@@ -25,16 +24,16 @@ public class SIU {
         return this.status;
     }
 
-    public boolean serviceLoad(Tramite unt) {
+    //public boolean serviceLoad(Tramite unt) {
         // Cargo un Tramite a mi BDD
-        return tramites.put(unt.getKey(), unT);
-    }
+        //return tramites.put(unt.getKey(), unT);
+    //}
 
-    public Tramite requestService(int key_service) {
-        Tramite a_service;
+    //public Tramite requestService(int key_service) {
+        //Tramite a_service;
         // Solicitar el servicio
-        a_service = (Tramite) tramite.get(key_service);
-        return a_service;
-    }
+        //a_service = (Tramite) tramite.get(key_service);
+        //return a_service;
+    //}
 
 }

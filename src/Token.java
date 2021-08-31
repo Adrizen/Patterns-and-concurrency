@@ -1,19 +1,23 @@
 
 public class Token {
-    private int user;
+    private String user;
     private String password;
 
-    public Token(int u, String p) {
+    public Token(String u, String p) {
         this.user = u;
         this.password = p;
     }
 
-public int getUser(){
-    return this.user;
-}
+    public String getUser(){
+        return this.user;
+    }
 
-    public boolean equals(Token unT) {
-        return this.user == unT.user && this.password == unT.password;
+    public String getPassword(){
+        return this.password;
+    }
+
+    public boolean equals(Token unToken){
+        return (this.user.equals(unToken.getUser()) && this.password.equals(unToken.getPassword()));
     }
 
 }
