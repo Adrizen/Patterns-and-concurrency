@@ -1,39 +1,28 @@
-import java.util.HashMap;
+import java.util.ArrayList;
 
 public class SIU {
-    private boolean status;     // Indica el estado del SIU
-    private HashMap tramites;   // Almacena los tramites posibles
+    private ArrayList<Tramite> tramites; // Almacena los tramites posibles
 
     public SIU() {
-        this.status = true;
-        this.tramites = new HashMap();
+        this.tramites = new ArrayList<Tramite>();
+        inicializarBaseDeDatos();
     }
 
-    public void serverDown() {
-        // Este metodo provoca la caida del servidor
-        this.status = false;
+    public void inicializarBaseDeDatos() {
+        tramites.add(new Tramite(1, "Certificado alumno regular."));
+        tramites.add(new Tramite(2, "Certificado alumno activo."));
+        tramites.add(new Tramite(3, "Historial académico."));
+        tramites.add(new Tramite(4, "Formulario para cambio de carrera."));
+        tramites.add(new Tramite(5, "Formulario para cursado paralelo."));
     }
 
-    public void serverUp() {
-        // Este metodo provoca la reconexion del servidor
-        this.status = true;
-    }
-
-    public boolean status() {
-        // Este metodo informa el estado del servidor
-        return this.status;
-    }
-
-    //public boolean serviceLoad(Tramite unt) {
-        // Cargo un Tramite a mi BDD
-        //return tramites.put(unt.getKey(), unT);
-    //}
-
-    //public Tramite requestService(int key_service) {
-        //Tramite a_service;
+    public Tramite requestService(Tramite unTramite) {
         // Solicitar el servicio
-        //a_service = (Tramite) tramite.get(key_service);
-        //return a_service;
-    //}
+        if (tramites.contains(unTramite)) {
+            Object documento = tramites.get(tramites.indexOf(unTramite)).getDocumento();
+            unTramite.setDocumento(documento);
+        }
+        return unTramite;
+    }
 
 }

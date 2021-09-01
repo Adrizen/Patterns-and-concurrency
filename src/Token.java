@@ -16,6 +16,10 @@ public class Token {
         return this.password;
     }
 
+    public String toString(){
+        return this.user + ";" + this.password;
+    }
+
     public boolean equals(Token unToken){
         return (this.user.equals(unToken.getUser()) && this.password.equals(unToken.getPassword()));
     }
