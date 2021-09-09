@@ -1,0 +1,5 @@
+1; Certificado alumno regular.; 
+2; Certificado alumno activo.; 
+3; Historial académico.; 
+4; Formulario para cambio de carrera.; 
+5; Formulario para cursado paralelo.;

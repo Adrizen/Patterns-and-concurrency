@@ -15,7 +15,7 @@ public class test {
         Scanner escaner = new Scanner(System.in);
         try {
             cargarUsuarios(interfazSIU);
-            Thread.sleep(200);  // Para que no se mezclen carteles xddddddddddddddd.
+            Thread.sleep(200);  // 
         } catch (Exception e) {
             System.err.println("Error leyendo o escribiendo en algun archivo.");
         }
@@ -36,7 +36,7 @@ public class test {
 
     // Lee el txt y carga los usuarios.
     public static void cargarUsuarios(InterfazSIU interfazSIU) throws IOException {
-        FileReader lectorArchivo = new FileReader("Patterns and concurrency\\src\\data.txt");
+        FileReader lectorArchivo = new FileReader("Patterns and concurrency\\src\\usuarios.txt");
         Scanner bufferLectura = new Scanner(lectorArchivo);
         bufferLectura.useDelimiter(";");
         String usuario, contraseña;
@@ -45,7 +45,7 @@ public class test {
             contraseña = bufferLectura.next();
             bufferLectura.nextLine(); // Bajo a la siguiente línea (siguiente user).
             interfazSIU.userLoad(usuario, contraseña); // Cargo los token.
-            new Thread(new Usuario(usuario, contraseña, interfazSIU)).start(); // Creo e inicio los hilos.
+            new Thread(new Usuario(usuario, contraseña, interfazSIU)).start(); // Creo e inicio el hilo del usuario.
         }
         bufferLectura.close();
     }

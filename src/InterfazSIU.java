@@ -24,9 +24,11 @@ public class InterfazSIU {
 
     // Inicializa los datos que se encuentran en la caché.
     private void inicializarCache() {
-        cache.add(new Tramite(1, "Certificado alumno regular."));
-        cache.add(new Tramite(2, "Certificado alumno activo."));
-        cache.add(new Tramite(3, "Historial académico."));
+        for (int i = 1; i < 4; i++) {
+            Tramite tramite = new Tramite(i);
+            tramite = siu.requestService(tramite);
+            cache.add(tramite);
+        }
     }
 
     // Utilizado para realizar el logueo de usuarios.
@@ -59,9 +61,10 @@ public class InterfazSIU {
         if (!recoverCache(tramite)) {
             // No está en cache.
             try {
-                Thread.sleep(7000); // Tiempo para recuperar de la BD.
-            } catch (InterruptedException e) { }
-            // Sleep grande.
+                Thread.sleep((int) (5000 * Math.random() + 5000)); // Tiempo para recuperar de la BD.
+
+            } catch (InterruptedException e) {
+            }
             tramite = siu.requestService(tramite); // Buscar en la BD.
         }
         return tramite;
@@ -73,7 +76,8 @@ public class InterfazSIU {
             exito = true;
             try {
                 Thread.sleep(100); // Tiempo para recuperar de caché.
-            } catch (InterruptedException e) { }
+            } catch (InterruptedException e) {
+            }
             Object documento = cache.get(cache.indexOf(unTramite)).getDocumento();
             unTramite.setDocumento(documento);
         }
