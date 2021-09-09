@@ -5,7 +5,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledFuture;
 import static java.util.concurrent.TimeUnit.*;
 
-public class InterfazSIU {
+public class Proxy implements ServiceInterface{
     private HashMap<String, Token> tokenUsuarios; // Donde se tiene los usuario;password
     private Backup servicioBackup; // Realiza periodicamente un backup de los token.
     ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(0); // scheduler que controla el servicio de backups.
@@ -13,7 +13,7 @@ public class InterfazSIU {
     private ArrayList<Tramite> cache; // Simulamos el cache en el proxy.
 
     // Constructor.
-    public InterfazSIU() {
+    public Proxy() {
         this.siu = new SIU();
         this.cache = new ArrayList<Tramite>();
         inicializarCache();
@@ -26,7 +26,7 @@ public class InterfazSIU {
     private void inicializarCache() {
         for (int i = 1; i < 4; i++) {
             Tramite tramite = new Tramite(i);
-            tramite = siu.requestService(tramite);
+            tramite = siu.serviceRequired(tramite);
             cache.add(tramite);
         }
     }
@@ -56,8 +56,8 @@ public class InterfazSIU {
         ScheduledFuture<?> backup = scheduler.scheduleWithFixedDelay(servicioBackup, 2, 2, SECONDS);
     }
 
-    public Tramite serviceRequired(int idTramite) {
-        Tramite tramite = new Tramite(idTramite);
+    @Override
+    public Tramite serviceRequired(Tramite tramite) {
         if (!recoverCache(tramite)) {
             // No está en cache.
             try {
@@ -65,7 +65,7 @@ public class InterfazSIU {
 
             } catch (InterruptedException e) {
             }
-            tramite = siu.requestService(tramite); // Buscar en la BD.
+            tramite = siu.serviceRequired(tramite); // Buscar en la BD.
         }
         return tramite;
     }

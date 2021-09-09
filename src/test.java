@@ -9,33 +9,17 @@ public class test {
     public static final String RESET = "\033[0m";  // Text Reset
 
     public static void main(String[] args) {
-        InterfazSIU interfazSIU = new InterfazSIU();
-        boolean seguir = false;
-        String respuesta;
-        Scanner escaner = new Scanner(System.in);
+        Proxy interfazSIU = new Proxy();
         try {
-            cargarUsuarios(interfazSIU);
-            Thread.sleep(200);  // 
-        } catch (Exception e) {
+            cargarUsuarios(interfazSIU);// 
+        } catch (IOException e) {
             System.err.println("Error leyendo o escribiendo en algun archivo.");
         }
-        System.out.println("Se han cargado los usuarios a partir del txt.");
-        do {
-            System.out.println("¿Quiere cargar otro? Use Y/N ");
-            respuesta = escaner.next();
-            if (respuesta.equalsIgnoreCase("Y")){
-                seguir = true;
-                crearUsuarioNuevo(interfazSIU);
-            } else {
-                seguir = false;
-            }
-        } while (seguir);
-
 
     }
 
     // Lee el txt y carga los usuarios.
-    public static void cargarUsuarios(InterfazSIU interfazSIU) throws IOException {
+    public static void cargarUsuarios(Proxy interfazSIU) throws IOException {
         FileReader lectorArchivo = new FileReader("Patterns and concurrency\\src\\usuarios.txt");
         Scanner bufferLectura = new Scanner(lectorArchivo);
         bufferLectura.useDelimiter(";");
@@ -51,7 +35,7 @@ public class test {
     }
 
     // Carga un usuario manualmente.
-    public static void crearUsuarioNuevo(InterfazSIU interfazSIU) {
+    public static void crearUsuarioNuevo(Proxy interfazSIU) {
         Scanner sc = new Scanner(System.in);
         String usuario, contraseña;
         System.out.println("Ingrese el nombre del usuario.");

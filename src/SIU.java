@@ -3,7 +3,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class SIU {
+public class SIU implements ServiceInterface{
     private ArrayList<Tramite> tramites; // Almacena los tramites posibles
 
     public SIU() {
@@ -30,13 +30,14 @@ public class SIU {
         bufferLectura.close();
     }
 
-    public Tramite requestService(Tramite unTramite) {
+    @Override
+    public Tramite serviceRequired(Tramite tramite) {
         // Solicitar el servicio
-        if (tramites.contains(unTramite)) {
-            Object documento = tramites.get(tramites.indexOf(unTramite)).getDocumento();
-            unTramite.setDocumento(documento);
+        if (tramites.contains(tramite)) {
+            Object documento = tramites.get(tramites.indexOf(tramite)).getDocumento();
+            tramite.setDocumento(documento);
         }
-        return unTramite;
+        return tramite;
     }
 
 }
