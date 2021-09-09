@@ -22,7 +22,7 @@ public class Usuario implements Runnable {
 
     public void run() {
         System.out.println("Soy " + this.user + " y me quiero loguear.");
-        if (interfazSIU.logIn(this.user, this.password)) {
+        if (interfazSIU.checkAccess(this.user, this.password)) {
             System.out.println(GREEN_BOLD + "Soy " + this.user + " y me pude loguear." + RESET);
             int idTramite = idTramiteAleatorio();
             System.out.println(GREEN_BOLD + "Soy " + this.user + " y voy a solicitar el trámite ID " + idTramite + RESET);

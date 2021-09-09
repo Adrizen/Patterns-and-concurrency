@@ -32,7 +32,7 @@ public class InterfazSIU {
     }
 
     // Utilizado para realizar el logueo de usuarios.
-    public boolean logIn(String user, String password) {
+    public boolean checkAccess(String user, String password) {
         boolean success = false;
         Token token = new Token(user, password);
         if (token.equals(tokenUsuarios.get(user)))
@@ -75,7 +75,7 @@ public class InterfazSIU {
         if (cache.contains(unTramite)) {
             exito = true;
             try {
-                Thread.sleep(100); // Tiempo para recuperar de caché.
+                Thread.sleep((int) (2000 * Math.random() + 1000)); // Tiempo para recuperar de caché.
             } catch (InterruptedException e) {
             }
             Object documento = cache.get(cache.indexOf(unTramite)).getDocumento();
