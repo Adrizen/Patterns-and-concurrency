@@ -3,9 +3,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class SIU implements ServiceInterface{
-    private ArrayList<Tramite> tramites; // Almacena los tramites posibles
+public class SIU implements ServiceInterface {
+    private ArrayList<Tramite> tramites; // Contiene todos los trámites posibles.
 
+    // Contructor.
     public SIU() {
         this.tramites = new ArrayList<Tramite>();
         try {
@@ -13,6 +14,10 @@ public class SIU implements ServiceInterface{
         } catch (IOException e) {
             System.out.println("Hubo un error al leer/escribir un archivo.");
         }
+    }
+
+    public ArrayList<Tramite> getTramites() {
+        return this.tramites;
     }
 
     public void inicializarBaseDeDatos(ArrayList<Tramite> tramite) throws IOException {
@@ -27,15 +32,16 @@ public class SIU implements ServiceInterface{
             bufferLectura.nextLine();
             tramite.add(new Tramite(id, documento));
         }
-        bufferLectura.close();
     }
 
-    @Override
-    public Tramite serviceRequired(Tramite tramite) {
-        // Solicitar el servicio
+    // Como desde la caché no se pudo recuperar el trámite, se accede a la BD.
+    public Tramite serviceRequired(Tramite tramite, Token unToken) {
         if (tramites.contains(tramite)) {
-            Object documento = tramites.get(tramites.indexOf(tramite)).getDocumento();
-            tramite.setDocumento(documento);
+            try {
+                Thread.sleep((int) (4000 * Math.random() + 4000)); // Tiempo para recuperar de la BD
+            } catch (InterruptedException e) { }
+            Object documento = tramites.get(tramites.indexOf(tramite)).getDocumento();  // Se obtiene el trámite desde la BD.
+            tramite.setDocumento(documento);    // Se completa el trámite.
         }
         return tramite;
     }

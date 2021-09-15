@@ -1,6 +1,6 @@
 
 public class Tramite {
-    private int id;
+    private int id;             // Identifica univocamente a un trámite.
     private Object documento;
 
     public Tramite(int id){
@@ -29,7 +29,7 @@ public class Tramite {
     }
 
    
-    public boolean equals(Object unTramite){    // Si aca en vez de Object pones Tramite el contains de ArrayList ignora este equals.
+    public boolean equals(Object unTramite){    // nota: Si aca en vez de Object pones Tramite el contains de ArrayList ignora este equals.
         return this.id == ((Tramite) unTramite).getID();
     }
 

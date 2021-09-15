@@ -1,9 +1,8 @@
 import java.util.Random;
 
 public class Usuario implements Runnable {
-
     private String user;
-    private Proxy interfazSIU;
+    private ServiceInterface interfazSIU;
     private String password;
 
     // Colores.
@@ -16,19 +15,17 @@ public class Usuario implements Runnable {
         this.interfazSIU = i;
     }
 
-    public String getUser() {
-        return this.user;
-    }
-
     public void run() {
-        System.out.println("Soy " + this.user + " y me quiero loguear.");
-        if (interfazSIU.checkAccess(this.user, this.password)) {
-            System.out.println(GREEN_BOLD + "Soy " + this.user + " y me pude loguear." + RESET);
-            int idTramite = idTramiteAleatorio();
-            System.out.println(GREEN_BOLD + "Soy " + this.user + " y voy a solicitar el trámite ID " + idTramite + RESET);
-            Tramite tramite = interfazSIU.serviceRequired(new Tramite(idTramite));
-            System.out.println(GREEN_BOLD + "Soy " + this.user + " y tengo mi trámite completado: " + tramite.getDocumento() + RESET);
-        }
+        long tiempoInicial = System.currentTimeMillis();
+        System.out.println(GREEN_BOLD + "Soy " + this.user + " y quiero usar el SIU Guaraní para unos trámites." + RESET);
+        int idTramite = idTramiteAleatorio();       // El usuario genera un ID de trámite aleatorio.
+        Tramite unTramite = new Tramite(idTramite); // Se crea el trámite.
+        System.out.println("Soy " + this.user + " y voy a solicitar el trámite ID " + idTramite);
+        Token unToken = new Token(user, password);  // Genero mi token de autenticación.
+        // El usuario se comunica con la interfaz enviando su token y el trámite a ser completado.
+        unTramite = interfazSIU.serviceRequired(unTramite, unToken);
+        long tiempoFinal = (System.currentTimeMillis() - tiempoInicial) / 1000;
+        System.out.println(GREEN_BOLD + "Soy " + this.user + " y tengo mi trámite ID " + idTramite + " completado: " + unTramite.getDocumento() + ". Tardé " + tiempoFinal + " segundos." + RESET);
     }
 
     // Genera un ID aleatorio válido para un tramite.
